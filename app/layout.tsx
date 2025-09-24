@@ -1,0 +1,49 @@
+import { ThemeProvider } from '@/components/providers/theme-provider'
+import './globals.css'
+
+import type { Metadata } from 'next'
+import { Montserrat, Space_Grotesk } from 'next/font/google'
+
+const montserrat = Montserrat({
+	variable: '--font-montserrat',
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700', '800', '900'],
+})
+
+const space_Grotesk = Space_Grotesk({
+	variable: '--font-space-grotesk',
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700'],
+})
+
+export const metadata: Metadata = {
+	title: 'Stream Youtube',
+	description: "Stream Youtbe is a platform for streaming yuotube's content.",
+}
+
+interface RootLayoutProps {
+	children: React.ReactNode
+}
+
+const RootLayout = ({ children }: RootLayoutProps) => {
+	return (
+		<html lang='en' suppressHydrationWarning={true}>
+			<body
+				suppressHydrationWarning={true}
+				className={`${montserrat.variable} ${space_Grotesk.variable} antialiased`}
+			>
+				<ThemeProvider
+					attribute='class'
+					defaultTheme='system'
+					enableSystem
+					disableTransitionOnChange
+					storageKey='sammi-theme'
+				>
+					{children}
+				</ThemeProvider>
+			</body>
+		</html>
+	)
+}
+
+export default RootLayout
